@@ -3,7 +3,8 @@ const { populate } = require('../models/Cart');
 
 const Cart = require('../models/Cart');
 const router = express.Router();
-const Product = require('../models/product');
+
+// viewCart
 router.get('/:id', (req, res, next) => {
 	Cart.findOne({ owner: req.params.id })
 		.populate('products')
@@ -11,8 +12,10 @@ router.get('/:id', (req, res, next) => {
 		.exec()
 		.then((cart) => res.json(cart));
 });
-
+// handleAdd
 router.post('/', async (req, res, next) => {
+	///finding the users cart and populating the products
+	///if a cart is not found creating a cart for the user and adding the product they clickd
 	try {
 		const found = await Cart.findOne({ owner: req.body.owner })
 			.populate('products')

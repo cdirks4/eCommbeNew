@@ -15,7 +15,6 @@ router.post('/google/', async (req, res, next) => {
 		idToken: token,
 		audience: process.env.GOOGLE_CLIENT_ID,
 	});
-	console.log(ticket);
 	const { name, email, picture, sub } = ticket.getPayload();
 
 	const user = await User.updateOne(
