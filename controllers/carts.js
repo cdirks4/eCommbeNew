@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
 		} else {
 			found.products.push(req.body.products);
 			found.paid = req.body.paid;
-			found.save();
+			await found.save();
 			res.json(found);
 		}
 	} catch {}
@@ -41,7 +41,7 @@ router.patch('/:id', async (req, res, next) => {
 		if (!cart) throw new Error('No user logged in!');
 		const index = cart.products.map((prod) => prod.id).indexOf(req.body.index);
 		cart.products.splice(index, 1);
-		cart.save();
+		await cart.save();
 		res.json(cart);
 	} catch (error) {
 		res.json(error);
@@ -55,7 +55,7 @@ router.put('/:id', async (req, res, next) => {
 		let newCart = await Cart.findOne({ _id: req.params.id })
 			.populate('products')
 			.exec();
-		cart.save();
+		await cart.save();
 		res.json(newCart);
 	} catch (error) {
 		res.json(error);
@@ -83,10 +83,9 @@ router.post('/checkout/:id', async (req, res, next) => {
 		cart.products.forEach((prod) => {
 			purchased.product.push(prod);
 		});
-
 		cart.purchased.push(purchased);
 		cart.products = [];
-		cart.save();
+		await cart.save();
 	} catch (error) {}
 });
 module.exports = router;
