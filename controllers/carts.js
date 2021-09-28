@@ -1,6 +1,5 @@
 const express = require('express');
-
-const Cart = require('../models/Cart');
+const Cart = require('../models/cart');
 const router = express.Router();
 
 // viewCart
