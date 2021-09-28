@@ -1,5 +1,4 @@
 const express = require('express');
-const { populate } = require('../models/Cart');
 
 const Cart = require('../models/Cart');
 const router = express.Router();

@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 // const mongoose: any = require('mongoose');
 require('dotenv').config();
 
-const mongoURI =
-	'mongodb+srv://ecom:UKXjGVVkDbCZALln@cluster0.7ujlv.mongodb.net/ecomDB?retryWrites=true&w=majority';
+const mongoURI = process.env.DB_URL;
 
 mongoose
 	.connect(mongoURI, {
